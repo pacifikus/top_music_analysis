@@ -1,8 +1,8 @@
-import luigi
-import config
-import spotify
 import clustering
+import config
+import luigi
 import pandas as pd
+import spotify
 
 
 class GetSpotifyDataTask(luigi.Task):
@@ -26,13 +26,12 @@ class ClusteringTask(luigi.Task):
         return luigi.LocalTarget(config.CLUSTERED_DATA_PATH)
 
     def run(self):
-        with self.input().open('r') as in_file:
-            df = pd.read_csv(in_file, index_col='Unnamed: 0')
+        with self.input().open("r") as in_file:
+            df = pd.read_csv(in_file, index_col="Unnamed: 0")
             optimal_k = clustering.silhouette(df, 10)
-            df['label'] = clustering.get_labels(df, optimal_k)
+            df["label"] = clustering.get_labels(df, optimal_k)
             df.to_csv(self.output().path)
 
 
-if __name__ == '__main__':
-    #luigi.run()
+if __name__ == "__main__":
     luigi.build([ClusteringTask()])
