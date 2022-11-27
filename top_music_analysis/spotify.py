@@ -3,16 +3,21 @@ import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-auth_manager = SpotifyClientCredentials(
-    client_id=config.SPOTIFY_CLIENT_ID,
-    client_secret=config.SPOTIFY_SECRET,
-)
 
-sp = spotipy.Spotify(auth_manager=auth_manager)
+def init_spotify():
+    auth_manager = SpotifyClientCredentials(
+        client_id=config.SPOTIFY_CLIENT_ID,
+        client_secret=config.SPOTIFY_SECRET,
+    )
+
+    return spotipy.Spotify(auth_manager=auth_manager)
+
+
+SPOTIFY = init_spotify()
 
 
 def get_100_tracks_from_playlist(playlist_id):
-    playlist_info = sp.playlist(playlist_id=playlist_id)
+    playlist_info = SPOTIFY.playlist(playlist_id=playlist_id)
     result = playlist_info["tracks"]["items"]
     result = [
         {
@@ -27,7 +32,7 @@ def get_100_tracks_from_playlist(playlist_id):
 
 
 def get_track_features(tracks):
-    track_features = sp.audio_features(tracks=tracks)
+    track_features = SPOTIFY.audio_features(tracks=tracks)
     return track_features
 
 

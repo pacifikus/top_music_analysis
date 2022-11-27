@@ -90,12 +90,14 @@ The project supports code style checking and formatting.
 #### Linters
 
 For the code linting [flake8](https://flake8.pycqa.org/en/latest/) is used.
-Also, these flake8 plugins are installed:
+These flake8 plugins are installed:
 - [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear)
 - [flake8-builtins](flake8-builtins)
 - [flake8-comprehensions](https://github.com/adamchainz/flake8-comprehensions)
 - [flake8-simplify](https://github.com/MartinThoma/flake8-simplify)
 - [flake8-commas](https://github.com/PyCQA/flake8-commas)
+
+Also, custom plugin [flake8-global-variables](https://github.com/pacifikus/flake8-global-variables) is used.
 
 #### Pre-commit
 
