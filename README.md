@@ -12,7 +12,7 @@ Columns:
 - **popularity** - the popularity of the track. The value will be between 0 and 100, with 100 being the most popular
 - **danceability** - this value describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity
 - **energy** - energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity
-- **key** -	the key the track is in. Integers map to pitches using standard Pitch Class notation. 
+- **key** -	the key the track is in. Integers map to pitches using standard Pitch Class notation.
 - **loudness** - the overall loudness of a track in decibels (dB)
 - **mode** - mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived
 - **speechiness** - this value detects the presence of spoken words in a track
@@ -46,7 +46,7 @@ Follow [poetry installation guide](https://python-poetry.org/docs/#installation)
 
 #### Install dependencies
 
-To install dependencies for the project, just run 
+To install dependencies for the project, just run
 
 ```commandline
 poetry install
@@ -91,9 +91,14 @@ The project supports code style checking and formatting.
 
 For the code linting [flake8](https://flake8.pycqa.org/en/latest/) is used.
 Also, these flake8 plugins are installed:
-- [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) 
-- [flake8-builtins](flake8-builtins) 
-- [flake8-comprehensions](https://github.com/adamchainz/flake8-comprehensions)  
-- [flake8-simplify](https://github.com/MartinThoma/flake8-simplify) 
+- [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear)
+- [flake8-builtins](flake8-builtins)
+- [flake8-comprehensions](https://github.com/adamchainz/flake8-comprehensions)
+- [flake8-simplify](https://github.com/MartinThoma/flake8-simplify)
 - [flake8-commas](https://github.com/PyCQA/flake8-commas)
 
+#### Pre-commit
+
+To run hooks automatically on every commit use [pre-commit](https://pre-commit.com/).
+
+To install pre-commit run `poetry run pre-commit install`
