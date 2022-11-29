@@ -32,8 +32,48 @@ Columns:
 |    ├── notebooks
 |       ├── eda.ipynb -- Jupyter notebook with an exploration data analysis.
 |       └── eda.pdf -- PDF-version of EDA notebook.
-|    ├── clustering.py -- Script with clustering functions.
-|    ├── config.py -- Settings and path configurations.
-|    ├── pipeline.py -- Luigi pipeline to run tasks (getting the data, clustering).
-│    └── spotify.py -- Script to get the songs data from the Spotify API.
+|    ├── top_music_analysis
+|       ├── clustering.py -- Script with clustering functions.
+|       ├── config.py -- Settings and path configurations.
+|       ├── pipeline.py -- Luigi pipeline to run tasks (getting the data, clustering).
+│       └── spotify.py -- Script to get the songs data from the Spotify API.
+```
+
+### How to run
+
+First of all, you need to install [Poetry](https://python-poetry.org/) - a tool for dependency management and packaging in Python.
+Follow [poetry installation guide](https://python-poetry.org/docs/#installation)
+
+#### Install dependencies
+
+To install dependencies for the project, just run 
+
+```commandline
+poetry install
+```
+
+To install packages without dev run
+```commandline
+poetry install --no-dev
+```
+
+After packages installation you can run scripts in `top_music_analysis` folder.
+
+### Publishing
+
+To build and publish project to [pypi-test](https://test.pypi.org/) run
+```
+poetry config repositories.test-pypi https://test.pypi.org/legacy/
+poetry config pypi-token.test-pypi <your-token>
+poetry publish --build -r test-pypi
+```
+
+Note: you can obtain your token in test-pypi profile settings.
+
+### Installation from test-pypi
+
+Current project is published to test-pypi - [top-music-analysis 0.1.0](https://test.pypi.org/project/top-music-analysis/), so you can install it directly with pip installation:
+
+```commandline
+pip install -i https://test.pypi.org/simple/ top-music-analysis
 ```
