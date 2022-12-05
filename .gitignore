@@ -114,3 +114,4 @@ venv.bak/
 .idea/
 /top_music_analysis/dist/
 /pypi-token
+/poetry.lock
