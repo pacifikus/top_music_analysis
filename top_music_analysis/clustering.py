@@ -1,8 +1,7 @@
+import config
 from pyclustertend import hopkins
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-
-import config
 
 
 def check_clustering_tendency(data):
@@ -11,10 +10,13 @@ def check_clustering_tendency(data):
 
 def silhouette(data, max_k):
     silhouette_values = []
-    feature_cols = data.drop(['name', 'artist'], axis=1).columns
+    feature_cols = data.drop(["name", "artist"], axis=1).columns
 
     for k in range(2, max_k):
-        kmeans = KMeans(n_clusters=k, random_state=config.SEED).fit(data[feature_cols])
+        kmeans = KMeans(
+            n_clusters=k,
+            random_state=config.SEED,
+        ).fit(data[feature_cols])
         silhouette_value = silhouette_score(data[feature_cols], kmeans.labels_)
         silhouette_values.append(silhouette_value)
     max_metric_value = max(silhouette_values)
@@ -22,9 +24,9 @@ def silhouette(data, max_k):
 
 
 def get_labels(data, k):
-    feature_cols = data.drop(['name', 'artist'], axis=1).columns
+    feature_cols = data.drop(["name", "artist"], axis=1).columns
     kmeans = KMeans(
         n_clusters=k,
-        random_state=config.SEED
+        random_state=config.SEED,
     ).fit(data[feature_cols])
     return kmeans.labels_
