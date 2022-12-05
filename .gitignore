@@ -115,3 +115,4 @@ venv.bak/
 /top_music_analysis/dist/
 /pypi-token
 /poetry.lock
+/data
