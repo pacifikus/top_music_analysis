@@ -75,6 +75,18 @@ luigid --background --pidfile <PATH_TO_PIDFILE> --logdir <PATH_TO_LOGDIR> --stat
 
 After that you can run tasks with `python top_music_analysis/pipeline.py`
 
+#### CLI
+
+Also, CLI created with [Click](https://click.palletsprojects.com/en/8.1.x/) is available. To get the data from Spotify run
+```
+python top_music_analysis/spotify.py --out spotify_data.csv
+```
+
+To perform clustering with collected data run
+```
+python top_music_analysis/clustering.py --data spotify_data.csv --out cls_result.csv
+```
+
 ### Publishing
 
 To build and publish project to [pypi-test](https://test.pypi.org/) run
