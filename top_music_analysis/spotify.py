@@ -1,3 +1,4 @@
+import click
 import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -7,8 +8,6 @@ from top_music_analysis.config import (
     SPOTIFY_CLIENT_ID,
     SPOTIFY_SECRET,
 )
-
-# from dotenv import
 
 
 def init_spotify():
@@ -69,3 +68,15 @@ def to_dataframe(data):
         inplace=True,
     )
     return df
+
+
+@click.command()
+@click.option("--out", default="spotify_res.csv", help="Output data path")
+def start(out):
+    data = get_data()
+    df = to_dataframe(data)
+    df.to_csv(out)
+
+
+if __name__ == "__main__":
+    start()

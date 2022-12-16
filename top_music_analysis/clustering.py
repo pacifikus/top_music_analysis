@@ -1,5 +1,7 @@
 import pickle
 
+import click
+import pandas as pd
 from pyclustertend import hopkins
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
@@ -35,3 +37,17 @@ def get_labels(data, k):
     with open("../models/k_means.pkl", "wb") as f:
         pickle.dump(kmeans, f)
     return kmeans.labels_
+
+
+@click.command()
+@click.option("--data", default="spotify_res.csv", help="Input data path")
+@click.option("--out", default="clustering_res.csv", help="Output data path")
+def start(data, out):
+    df = pd.read_csv(data, index_col="Unnamed: 0")
+    optimal_k = silhouette(df, 10)
+    df["label"] = get_labels(df, optimal_k)
+    df.to_csv(out)
+
+
+if __name__ == "__main__":
+    start()
