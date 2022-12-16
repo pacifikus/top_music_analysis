@@ -1,13 +1,20 @@
-import config
 import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
+from top_music_analysis.config import (
+    PLAYLIST_IDS,
+    SPOTIFY_CLIENT_ID,
+    SPOTIFY_SECRET,
+)
+
+# from dotenv import
+
 
 def init_spotify():
     auth_manager = SpotifyClientCredentials(
-        client_id=config.SPOTIFY_CLIENT_ID,
-        client_secret=config.SPOTIFY_SECRET,
+        client_id=SPOTIFY_CLIENT_ID,
+        client_secret=SPOTIFY_SECRET,
     )
 
     return spotipy.Spotify(auth_manager=auth_manager)
@@ -38,7 +45,7 @@ def get_track_features(tracks):
 
 def get_data():
     data = {}
-    for item in config.PLAYLIST_IDS:
+    for item in PLAYLIST_IDS:
         key, value = get_100_tracks_from_playlist(item)
         tracks_features = get_track_features([item["id"] for item in value])
         for i in range(len(value)):

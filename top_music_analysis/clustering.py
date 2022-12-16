@@ -1,7 +1,10 @@
-import config
+import pickle
+
 from pyclustertend import hopkins
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
+
+import top_music_analysis.config as config
 
 
 def check_clustering_tendency(data):
@@ -29,4 +32,6 @@ def get_labels(data, k):
         n_clusters=k,
         random_state=config.SEED,
     ).fit(data[feature_cols])
+    with open("../models/k_means.pkl", "wb") as f:
+        pickle.dump(kmeans, f)
     return kmeans.labels_
