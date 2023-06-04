@@ -1,8 +1,9 @@
-import clustering
-import config
 import luigi
 import pandas as pd
-import spotify
+
+import top_music_analysis.clustering as clustering
+import top_music_analysis.config as config
+import top_music_analysis.spotify as spotify
 
 
 class GetSpotifyDataTask(luigi.Task):
@@ -34,4 +35,5 @@ class ClusteringTask(luigi.Task):
 
 
 if __name__ == "__main__":
-    luigi.build([ClusteringTask()])
+    # luigi.run()
+    luigi.build([GetSpotifyDataTask(), ClusteringTask()], local_scheduler=True)

@@ -1,13 +1,19 @@
-import config
+import click
 import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
+from top_music_analysis.config import (
+    PLAYLIST_IDS,
+    SPOTIFY_CLIENT_ID,
+    SPOTIFY_SECRET,
+)
+
 
 def init_spotify():
     auth_manager = SpotifyClientCredentials(
-        client_id=config.SPOTIFY_CLIENT_ID,
-        client_secret=config.SPOTIFY_SECRET,
+        client_id=SPOTIFY_CLIENT_ID,
+        client_secret=SPOTIFY_SECRET,
     )
 
     return spotipy.Spotify(auth_manager=auth_manager)
@@ -38,7 +44,7 @@ def get_track_features(tracks):
 
 def get_data():
     data = {}
-    for item in config.PLAYLIST_IDS:
+    for item in PLAYLIST_IDS:
         key, value = get_100_tracks_from_playlist(item)
         tracks_features = get_track_features([item["id"] for item in value])
         for i in range(len(value)):
@@ -62,3 +68,15 @@ def to_dataframe(data):
         inplace=True,
     )
     return df
+
+
+@click.command()
+@click.option("--out", default="spotify_res.csv", help="Output data path")
+def start(out):
+    data = get_data()
+    df = to_dataframe(data)
+    df.to_csv(out)
+
+
+if __name__ == "__main__":
+    start()
